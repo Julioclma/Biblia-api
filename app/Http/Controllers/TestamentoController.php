@@ -12,7 +12,7 @@ class TestamentoController extends Controller
      */
     public function index()
     {
-        //
+        return Testamento::all();
     }
 
     /**
@@ -28,7 +28,7 @@ class TestamentoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Testamento::findOrFail($id);
     }
 
     /**
@@ -36,7 +36,7 @@ class TestamentoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return Testamento::find($id)->update($request->all());
     }
 
     /**
@@ -44,6 +44,6 @@ class TestamentoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Testamento::destroy($id);
     }
 }
