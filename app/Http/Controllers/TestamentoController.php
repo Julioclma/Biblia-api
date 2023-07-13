@@ -38,15 +38,21 @@ class TestamentoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
-        return Testamento::findOrFail($id);
+        $testamentoExist = Testamento::find($id);
+
+        if($testamentoExist){
+            return response()->json($testamentoExist);
+        }
+        
+        return response()->json(['message' => 'Testamento não encontrado', 'content' => $id]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): JsonResponse
     {
 
         $testamentoExist = Testamento::find($id);
@@ -54,7 +60,7 @@ class TestamentoController extends Controller
         if ($testamentoExist) {
 
             $update = Testamento::find($id)->update($request->all());
-            
+
             if ($update) {
                 return response()->json(['message' => 'Testamento atualizado com sucesso!', 'content' => $request->all()]);
             }
@@ -67,7 +73,7 @@ class TestamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
 
         $content = Testamento::find($id);
