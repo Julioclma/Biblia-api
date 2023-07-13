@@ -26,7 +26,7 @@ class LivroController extends Controller
         $created = Livro::create($request->all());
 
         if ($created) {
-            return response()->json(['message' => 'Livro cadastrado com sucesso!', 'content' => $request->all()]);
+            return response()->json(['message' => 'Livro cadastrado com sucesso!', 'content' => $request->all()], 201);
         }
         return response()->json(['message' => 'Não foi possivel cadastrar o Livro']);
     }
