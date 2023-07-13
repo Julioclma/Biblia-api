@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class TestamentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): JsonResponse
     {
         $check = Testamento::all();
@@ -22,9 +19,6 @@ class TestamentoController extends Controller
         return response()->json(['message' => 'Nenhum testamento encontrado']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): JsonResponse
     {
         $check = Testamento::create($request->all());
@@ -35,26 +29,19 @@ class TestamentoController extends Controller
         return response()->json(['message' => 'Erro ao cadastrar', 'content' => $request->all()]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id): JsonResponse
     {
         $testamentoExist = Testamento::find($id);
 
-        if($testamentoExist){
+        if ($testamentoExist) {
             return response()->json($testamentoExist);
         }
-        
-        return response()->json(['message' => 'Testamento não encontrado', 'content' => $id]);
+
+        return response()->json(['message' => 'Testamento não encontrado', 'id' => $id]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id): JsonResponse
     {
-
         $testamentoExist = Testamento::find($id);
 
         if ($testamentoExist) {
@@ -70,12 +57,8 @@ class TestamentoController extends Controller
         return response()->json(['message' => 'Testamento não encontrado', 'content' => $request->all()]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id): JsonResponse
     {
-
         $content = Testamento::find($id);
 
         if (!is_null($content)) {
