@@ -20,13 +20,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['middleware' => ['auth:sanctum']], function(){
+Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResources([
         'testamento' => TestamentoController::class,
         'livro' => LivroController::class,
         'versiculo' => VersiculoController::class
     ]);
 
+    Route::post('logout', [AuthController::class, 'logout']);
 });
 
 Route::post('register', [AuthController::class, 'register']);
