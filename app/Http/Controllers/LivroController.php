@@ -17,7 +17,7 @@ class LivroController extends Controller
             return response()->json($livroExist);
         }
 
-        return response()->json(['message' => 'Nenhum livro cadastrado!']);
+        return response()->json(['message' => 'Nenhum livro cadastrado!'], 201);
     }
 
 
@@ -37,7 +37,7 @@ class LivroController extends Controller
         $livroExist = Livro::find($id);
 
         if ($livroExist) {
-            return response()->json($livroExist);
+            return response()->json($livroExist, 200);
         }
 
         return response()->json(['message' => 'Livro não encontrado!']);
@@ -51,7 +51,7 @@ class LivroController extends Controller
         if ($livroExist) {
 
             if (Livro::find($id)->update($request->all())) {
-                return response()->json(['message' => 'Livro Alterado com sucesso!']);
+                return response()->json(['message' => 'Livro Alterado com sucesso!'], 200);
             }
 
             return response()->json(['message' => 'Erro ao alterar livro!']);

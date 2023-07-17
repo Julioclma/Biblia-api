@@ -10,7 +10,7 @@ class VersiculoController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json(Versiculo::all());
+        return response()->json(Versiculo::all(), 200);
     }
 
     public function store(Request $request): JsonResponse
@@ -18,7 +18,7 @@ class VersiculoController extends Controller
         $create = Versiculo::create($request->all());
 
         if ($create) {
-            return response()->json(['message' => 'Versículo criado com sucesso!', 'content' => $request->all()]);
+            return response()->json(['message' => 'Versículo criado com sucesso!', 'content' => $request->all()], 201);
         }
 
         return response()->json(['message' => 'Erro ao criar Versículo']);
