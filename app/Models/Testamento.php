@@ -9,4 +9,9 @@ class Testamento extends Model
 {
     use HasFactory;
     protected $fillable = ['nome'];
+
+    public function livros(string $id)
+    {
+        return Livro::where('testamento_id', $id)->get();
+    }
 }

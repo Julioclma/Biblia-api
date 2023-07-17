@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Livro;
 use App\Models\Testamento;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -31,10 +32,13 @@ class TestamentoController extends Controller
 
     public function show(string $id): JsonResponse
     {
-        $testamentoExist = Testamento::find($id);
+        $testamento = Testamento::find($id);
 
-        if ($testamentoExist) {
-            return response()->json($testamentoExist, 200);
+        if ($testamento) {
+            return response()->json([
+                'testamento' => $testamento,
+                'livros' => $testamento->livros($id)
+            ], 200);
         }
 
         return response()->json(['message' => 'Testamento não encontrado', 'id' => $id], 404);

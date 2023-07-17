@@ -34,10 +34,11 @@ class LivroController extends Controller
 
     public function show(string $id): JsonResponse
     {
-        $livroExist = Livro::find($id);
+        $livro = Livro::find($id);
 
-        if ($livroExist) {
-            return response()->json($livroExist, 200);
+        if ($livro) {
+            return response()->json(['livro' => $livro,
+        'testamento' => $livro->testamento], 200);
         }
 
         return response()->json(['message' => 'Livro não encontrado!'], 404);

@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResources([
         'testamento' => TestamentoController::class,
