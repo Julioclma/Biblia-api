@@ -13,10 +13,10 @@ class TestamentoController extends Controller
         $check = Testamento::all();
 
         if (count($check) > 0) {
-            return response()->json($check);
+            return response()->json($check, 200);
         }
 
-        return response()->json(['message' => 'Nenhum testamento encontrado']);
+        return response()->json(['message' => 'Nenhum testamento encontrado'], 404);
     }
 
     public function store(Request $request): JsonResponse
@@ -24,9 +24,9 @@ class TestamentoController extends Controller
         $check = Testamento::create($request->all());
 
         if ($check) {
-            return response()->json(['message' => 'Cadastrado com sucesso', 'content' => $request->all()]);
+            return response()->json(['message' => 'Cadastrado com sucesso', 'content' => $request->all()], 201);
         }
-        return response()->json(['message' => 'Erro ao cadastrar', 'content' => $request->all()]);
+        return response()->json(['message' => 'Erro ao cadastrar', 'content' => $request->all()], 404);
     }
 
     public function show(string $id): JsonResponse
@@ -34,10 +34,10 @@ class TestamentoController extends Controller
         $testamentoExist = Testamento::find($id);
 
         if ($testamentoExist) {
-            return response()->json($testamentoExist);
+            return response()->json($testamentoExist, 200);
         }
 
-        return response()->json(['message' => 'Testamento não encontrado', 'id' => $id]);
+        return response()->json(['message' => 'Testamento não encontrado', 'id' => $id], 404);
     }
 
     public function update(Request $request, string $id): JsonResponse
@@ -49,12 +49,12 @@ class TestamentoController extends Controller
             $update = Testamento::find($id)->update($request->all());
 
             if ($update) {
-                return response()->json(['message' => 'Testamento atualizado com sucesso!', 'content' => $request->all()]);
+                return response()->json(['message' => 'Testamento atualizado com sucesso!', 'content' => $request->all()], 200);
             }
-            return response()->json(['message' => 'Não foi possivel atualizar o testamento!', 'content' => $request->all()]);
+            return response()->json(['message' => 'Não foi possivel atualizar o testamento!', 'content' => $request->all()], 404);
         }
 
-        return response()->json(['message' => 'Testamento não encontrado', 'content' => $request->all()]);
+        return response()->json(['message' => 'Testamento não encontrado', 'content' => $request->all()], 404);
     }
 
     public function destroy(string $id): JsonResponse
@@ -65,12 +65,12 @@ class TestamentoController extends Controller
             $destroy = Testamento::destroy($id);
 
             if ($destroy) {
-                return  response()->json(['message' => 'Testamento deletado com sucesso', 'content' => $content]);
+                return  response()->json(['message' => 'Testamento deletado com sucesso', 'content' => $content], 200);
             }
 
-            return response()->json(['message' => 'Erro ao deletar testamento', 'content' => $content]);
+            return response()->json(['message' => 'Erro ao deletar testamento', 'content' => $content], 404);
         }
 
-        return response()->json(['message' => 'Nenhum registro encontrado', 'id' => $id]);
+        return response()->json(['message' => 'Nenhum registro encontrado', 'id' => $id], 404);
     }
 }

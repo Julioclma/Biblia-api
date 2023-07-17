@@ -14,10 +14,10 @@ class LivroController extends Controller
         $livroExist = Livro::all();
 
         if ($livroExist) {
-            return response()->json($livroExist);
+            return response()->json($livroExist, 200);
         }
 
-        return response()->json(['message' => 'Nenhum livro cadastrado!'], 201);
+        return response()->json(['message' => 'Nenhum livro cadastrado!'], 404);
     }
 
 
@@ -28,7 +28,7 @@ class LivroController extends Controller
         if ($created) {
             return response()->json(['message' => 'Livro cadastrado com sucesso!', 'content' => $request->all()], 201);
         }
-        return response()->json(['message' => 'Não foi possivel cadastrar o Livro']);
+        return response()->json(['message' => 'Não foi possivel cadastrar o Livro'], 404);
     }
 
 
@@ -40,7 +40,7 @@ class LivroController extends Controller
             return response()->json($livroExist, 200);
         }
 
-        return response()->json(['message' => 'Livro não encontrado!']);
+        return response()->json(['message' => 'Livro não encontrado!'], 404);
     }
 
 
@@ -54,10 +54,10 @@ class LivroController extends Controller
                 return response()->json(['message' => 'Livro Alterado com sucesso!'], 200);
             }
 
-            return response()->json(['message' => 'Erro ao alterar livro!']);
+            return response()->json(['message' => 'Erro ao alterar livro!'], 404);
         }
 
-        return response()->json(['message' => 'Livro não encontrado!']);
+        return response()->json(['message' => 'Livro não encontrado!'], 404);
     }
 
 
@@ -66,9 +66,9 @@ class LivroController extends Controller
         $result = Livro::destroy($id);
 
         if ($result) {
-            return response()->json('Livro deletado com sucesso!');
+            return response()->json('Livro deletado com sucesso!', 200);
         }
 
-        return response()->json('Erro ao deletar livro!');
+        return response()->json('Erro ao deletar livro!', 404);
     }
 }
