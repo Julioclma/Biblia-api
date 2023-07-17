@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\TestamentoController;
 use App\Http\Controllers\VersiculoController;
@@ -17,26 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/testamento', [TestamentoController::class, 'index']);
-Route::post('/testamento', [TestamentoController::class, 'store']);
-Route::get('/testamento/{id}', [TestamentoController::class, 'show']);
-Route::put('/testamento/{id}', [TestamentoController::class, 'update']);
-Route::delete('/testamento/{id}', [TestamentoController::class, 'destroy']);
 
-Route::get('/livro', [LivroController::class, 'index']);
-Route::get('/livro/{id}', [LivroController::class, 'show']);
-Route::put('/livro/{id}', [LivroController::class, 'update']);
-Route::post('/livro', [LivroController::class, 'store']);
-Route::delete('/livro/{id}', [LivroController::class, 'destroy']);
+Route::apiResources([
+    'testamento' => TestamentoController::class,
+    'livro' => LivroController::class,
+    'versiculo' => VersiculoController::class
+]);
 
-Route::get('/versiculo', [VersiculoController::class, 'index']);
-Route::get('/versiculo/{id}', [VersiculoController::class, 'show']);
-Route::put('/versiculo/{id}', [VersiculoController::class, 'update']);
-Route::post('/versiculo', [VersiculoController::class, 'store']);
-Route::delete('/versiculo/{id}', [VersiculoController::class, 'destroy']);
-
-
-
+Route::post('register', [AuthController::class, 'register']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
