@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Livro extends Model
 {
     use HasFactory;
-    protected $fillable = ['posicao', 'nome', 'abreviacao', 'testamento_id'];
+    protected $fillable = ['posicao', 'nome', 'abreviacao', 'testamento_id', 'versao_id'];
 
-    public function testamento()
+    public function testamento(string $id)
     {
-        return Livro::belongsTo(Testamento::class);
+        return Testamento::find($id);
+    }
+
+    public function versao(string $id)
+    {
+        return Versao::find($id);
     }
 }

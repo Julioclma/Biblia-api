@@ -38,7 +38,8 @@ class LivroController extends Controller
 
         if ($livro) {
             return response()->json(['livro' => $livro,
-        'testamento' => $livro->testamento], 200);
+        'testamento' => $livro->testamento($id),
+    'versao' => $livro->versao($id)], 200);
         }
 
         return response()->json(['message' => 'Livro não encontrado!'], 404);
