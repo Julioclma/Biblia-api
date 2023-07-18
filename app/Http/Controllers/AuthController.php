@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(Request $request) : Response
     {
         $fields = $request->validate([
             'name' => 'required|string',
@@ -32,7 +33,7 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-    public function login(Request $request)
+    public function login(Request $request) : Response
     {
         $fields = $request->validate([
             'email' => 'required|string',
@@ -57,7 +58,7 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request) : Response
     {
         auth()->user()->tokens()->delete();
 
